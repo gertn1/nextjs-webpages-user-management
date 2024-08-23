@@ -1,29 +1,26 @@
-// import React from "react";
-// import { getUserName, logout } from "@/services/authService";
+import React from "react";
+import { useRouter } from "next/router";
 
-// const Navbar: React.FC = () => {
-//   const userName = getUserName();
+import Button from "../Button";
+import { logout } from "@/pages/api/auth/authService";
 
-//   const handleLogout = () => {
-//     logout();
-//     window.location.reload(); // Recarrega a página após logout
-//   };
+const Navbar: React.FC = () => {
+  const router = useRouter();
 
-//   return (
-//     <nav>
-//       <div>
-//         <h1>Bem-vindo ao sistema</h1>
-//         {userName ? (
-//           <div>
-//             <p>Logado como: {userName}</p>
-//             <button onClick={handleLogout}>Logout</button>
-//           </div>
-//         ) : (
-//           <p>Você não está logado</p>
-//         )}
-//       </div>
-//     </nav>
-//   );
-// };
+  const handleLogout = () => {
+    logout();
+    router.push("/login/login");
+  };
 
-// export default Navbar;
+  return (
+    <nav>
+      <div>
+        <h1>Bem-vindo ao sistema</h1>
+        <p>Você não está logado</p>
+        <Button onClick={handleLogout}>Sair</Button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { login } from "@/services/authService";
+import { login } from "../api/auth/authService";
 
 const LoginContainer = styled.div`
   max-width: 400px;
