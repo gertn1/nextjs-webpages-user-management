@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { login } from "../api/auth/authService";
@@ -38,17 +38,31 @@ const ErrorMessage = styled.p`
   color: red;
 `;
 
+const getCookie = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(";").shift();
+};
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  // Verifique se o usuário já está autenticado
+  useEffect(() => {
+    const token = getCookie("authToken");
+    if (token) {
+      router.push("/");
+    }
+  }, [router]);
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
       await login(email, password);
-      router.push("/"); // Redireciona para a página inicial após o login bem-sucedido
+      router.push("/");
     } catch (err) {
       setError(
         "Falha ao fazer login. Verifique suas credenciais e tente novamente."
@@ -77,6 +91,7 @@ const Login: React.FC = () => {
         />
         <LoginButton type="submit">Entrar</LoginButton>
       </form>
+      germano@gmail.com
     </LoginContainer>
   );
 };
