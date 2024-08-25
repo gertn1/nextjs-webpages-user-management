@@ -1,4 +1,22 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const StyleProfileInfo = styled.div`
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+`;
+
+const StyleProfileText = styled.div`
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  color: #a9a8a8;
+  font-weight: bold;
+  padding: 0.5rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+`;
 
 const getCookie = (name: string) => {
   const value = `; ${document.cookie}`;
@@ -15,7 +33,7 @@ const CurrentUserFetcher: React.FC = () => {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const token = getCookie("authToken"); // Use o token do cookie
+        const token = getCookie("authToken");
         if (!token) {
           throw new Error("Token not found");
         }
@@ -56,7 +74,14 @@ const CurrentUserFetcher: React.FC = () => {
     return <p>Error: {error}</p>;
   }
 
-  return <p>Bem-vindo, {currentUserName || "Usuário"}</p>;
+  return (
+    <div>
+      <StyleProfileText>Usuário</StyleProfileText>
+      <StyleProfileInfo>{currentUserName}</StyleProfileInfo>
+      {/* <StyleProfileText>Perfil</StyleProfileText>
+      <StyleProfileInfo>Tipo de Perfil</StyleProfileInfo> */}
+    </div>
+  );
 };
 
 export default CurrentUserFetcher;

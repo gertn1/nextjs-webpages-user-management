@@ -14,5 +14,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/calcas/:path*", "/pages/:path*"],
+  matcher: ["/calcas/:path*"],
 };
