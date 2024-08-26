@@ -1,6 +1,8 @@
 // import React, { useState, useEffect } from "react";
 // import styled from "styled-components";
 // import { apiService } from "@/pages/api/Service/apiService";
+// import { Container, Form, Input, List, ListItem, Select } from "./styles";
+// import Button from "../Button";
 
 // interface User {
 //   id: number;
@@ -14,9 +16,7 @@
 //   const [loading, setLoading] = useState<boolean>(false);
 //   const [error, setError] = useState<string | null>(null);
 //   const [editingUser, setEditingUser] = useState<User | null>(null);
-//   const [creatingUser, setCreatingUser] = useState<User | null>(null); // Estado para controle de criação de usuário
-//   const [deletingUser, setDeletingUser] = useState<User | null>(null); // Estado para usuário a ser deletado
-//   const [confirmingDelete, setConfirmingDelete] = useState<boolean>(false); // Estado para confirmação de exclusão
+//   const [creatingUser, setCreatingUser] = useState<User | null>(null);
 //   const [isCreating, setIsCreating] = useState<boolean>(false); // Estado para controlar a exibição do formulário de criação
 //   const [refresh, setRefresh] = useState<boolean>(false); // Estado para controle de refresh
 
@@ -64,35 +64,20 @@
 //       if (editingUser) {
 //         await apiService.put(`/User/EditUser/${editingUser.id}`, editingUser);
 //         setEditingUser(null);
-//         setRefresh(!refresh); // Atualiza o estado de `refresh` para disparar o useEffect
+//         setRefresh(!refresh);
 //       }
 //     } catch (error) {
 //       console.error("Failed to update user", error);
 //     }
 //   };
 
-//   const handleDeleteUser = async () => {
+//   const handleDeleteUser = async (userId: number) => {
 //     try {
-//       if (deletingUser) {
-//         await apiService.delete(`/User/RemoveUser/${deletingUser.id}`);
-//         setDeletingUser(null);
-//         setConfirmingDelete(false);
-//         setRefresh(!refresh); // Atualiza o estado de `refresh` para disparar o useEffect
-//       }
+//       await apiService.delete(`/User/RemoveUser/${userId}`);
+//       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
 //     } catch (error) {
 //       console.error("Failed to delete user", error);
 //     }
-//   };
-
-//   const confirmDeleteUser = (user: User) => {
-//     setDeletingUser(user);
-//     setConfirmingDelete(true);
-//     // Atualiza o estado para exibir o prompt de confirmação
-//   };
-
-//   const cancelDelete = () => {
-//     setDeletingUser(null);
-//     setConfirmingDelete(false); // Cancela a exclusão e esconde o prompt de confirmação
 //   };
 
 //   const startCreatingUser = () => {
@@ -101,8 +86,8 @@
 //   };
 
 //   const cancelCreateUser = () => {
-//     setCreatingUser(null); // Cancela o processo de criação de usuário
-//     setIsCreating(false); // Esconde o formulário de criação
+//     setCreatingUser(null);
+//     setIsCreating(false);
 //   };
 
 //   const getRoleLabel = (roleId: number) => {
@@ -190,14 +175,6 @@
 //         </Form>
 //       )}
 
-//       {confirmingDelete && deletingUser && (
-//         <div>
-//           <p>Are you sure you want to delete {deletingUser.name}?</p>
-//           <Button onClick={handleDeleteUser}>Confirm Delete</Button>
-//           <Button onClick={cancelDelete}>Cancel</Button>
-//         </div>
-//       )}
-
 //       <List>
 //         {loading ? (
 //           <p>Loading...</p>
@@ -210,7 +187,7 @@
 //               <span>{user.email}</span>
 //               <span>{getRoleLabel(user.roleId)}</span>
 //               <Button onClick={() => handleEditUser(user)}>Edit</Button>
-//               <Button onClick={() => confirmDeleteUser(user)}>Delete</Button>
+//               <Button onClick={() => handleDeleteUser(user.id)}>Delete</Button>
 //             </ListItem>
 //           ))
 //         )}
@@ -221,66 +198,10 @@
 
 // export default UserList;
 
-// // Styled components for layout
-// const Container = styled.div`
-//   padding: 20px;
-// `;
-
-// const Form = styled.div`
-//   margin-bottom: 20px;
-// `;
-
-// const Input = styled.input`
-//   padding: 10px;
-//   margin-right: 10px;
-//   border: 1px solid #ddd;
-//   border-radius: 4px;
-// `;
-
-// const Select = styled.select`
-//   padding: 10px;
-//   margin-right: 10px;
-//   border: 1px solid #ddd;
-//   border-radius: 4px;
-// `;
-
-// const Button = styled.button`
-//   padding: 10px 20px;
-//   margin-right: 10px;
-//   background-color: #0070f3;
-//   color: white;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: #005bb5;
-//   }
-// `;
-
-// const List = styled.ul`
-//   list-style: none;
-//   padding: 0;
-// `;
-
-// const ListItem = styled.li`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 10px;
-//   border: 1px solid #ddd;
-//   border-radius: 4px;
-//   margin-bottom: 10px;
-
-//   span {
-//     flex: 1;
-//     padding: 0 10px;
-//   }
-// `;
-
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { apiService } from "@/pages/api/Service/apiService";
+import { Container, Form, Input, List, ListItem, Select } from "./styles";
+import Button from "../Button";
 
 interface User {
   id: number;
@@ -294,15 +215,13 @@ const UserList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
-  const [creatingUser, setCreatingUser] = useState<User | null>(null); // Estado para controle de criação de usuário
-  const [deletingUser, setDeletingUser] = useState<User | null>(null); // Estado para usuário a ser deletado
-  const [confirmingDelete, setConfirmingDelete] = useState<boolean>(false); // Estado para confirmação de exclusão
+  const [creatingUser, setCreatingUser] = useState<User | null>(null);
   const [isCreating, setIsCreating] = useState<boolean>(false); // Estado para controlar a exibição do formulário de criação
-  const [refresh, setRefresh] = useState<boolean>(false); // Estado para controle de refresh
+  const [deletedUserId, setDeletedUserId] = useState<number | null>(null); // Estado para controlar o ID do usuário deletado
 
   useEffect(() => {
     fetchUsers();
-  }, [refresh]); // Executa fetchUsers sempre que `refresh` mudar
+  }, [deletedUserId]); // Executa fetchUsers sempre que `deletedUserId` mudar
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -328,7 +247,7 @@ const UserList: React.FC = () => {
         await apiService.post("/User/CreateUser", creatingUser);
         setCreatingUser(null); // Reseta o estado após a criação
         setIsCreating(false); // Esconde o formulário de criação após criar o usuário
-        setRefresh(!refresh); // Atualiza o estado de `refresh` para disparar o useEffect
+        fetchUsers(); // Recarrega a lista de usuários
       }
     } catch (error) {
       console.error("Failed to create user", error);
@@ -344,37 +263,21 @@ const UserList: React.FC = () => {
       if (editingUser) {
         await apiService.put(`/User/EditUser/${editingUser.id}`, editingUser);
         setEditingUser(null);
-        setRefresh(!refresh); // Atualiza o estado de `refresh` para disparar o useEffect
+        fetchUsers(); // Recarrega a lista de usuários
       }
     } catch (error) {
       console.error("Failed to update user", error);
     }
   };
 
-  const handleDeleteUser = async () => {
+  const handleDeleteUser = async (userId: number) => {
     try {
-      if (deletingUser) {
-        await apiService.delete(`/User/RemoveUser/${deletingUser.id}`);
-        setDeletingUser(null);
-        setConfirmingDelete(false);
-        setRefresh(!refresh); // Atualiza o estado de `refresh` para disparar o useEffect
-      }
+      console.log("Deleting user with ID:", userId); // Confirmação de que a função foi chamada
+      await apiService.delete(`/User/RemoveUser/${userId}`);
+      setDeletedUserId(userId); // Atualiza o estado `deletedUserId` para disparar o useEffect e recarregar a lista
     } catch (error) {
       console.error("Failed to delete user", error);
     }
-  };
-
-  const confirmDeleteUser = (user: User) => {
-    setDeletingUser(user);
-    setConfirmingDelete(true);
-
-    // Atualiza o estado para exibir o prompt de confirmação
-  };
-
-  const cancelDelete = () => {
-    setDeletingUser(null);
-    setConfirmingDelete(false);
-    // Cancela a exclusão e esconde o prompt de confirmação
   };
 
   const startCreatingUser = () => {
@@ -383,9 +286,8 @@ const UserList: React.FC = () => {
   };
 
   const cancelCreateUser = () => {
-    setCreatingUser(null); // Cancela o processo de criação de usuário
+    setCreatingUser(null);
     setIsCreating(false);
-    // Esconde o formulário de criação
   };
 
   const getRoleLabel = (roleId: number) => {
@@ -473,14 +375,6 @@ const UserList: React.FC = () => {
         </Form>
       )}
 
-      {confirmingDelete && deletingUser && (
-        <div>
-          <p>Are you sure you want to delete {deletingUser.name}?</p>
-          <Button onClick={handleDeleteUser}>Confirm Delete</Button>
-          <Button onClick={cancelDelete}>Cancel</Button>
-        </div>
-      )}
-
       <List>
         {loading ? (
           <p>Loading...</p>
@@ -493,7 +387,7 @@ const UserList: React.FC = () => {
               <span>{user.email}</span>
               <span>{getRoleLabel(user.roleId)}</span>
               <Button onClick={() => handleEditUser(user)}>Edit</Button>
-              <Button onClick={() => confirmDeleteUser(user)}>Delete</Button>
+              <Button onClick={() => handleDeleteUser(user.id)}>Delete</Button>
             </ListItem>
           ))
         )}
@@ -503,60 +397,3 @@ const UserList: React.FC = () => {
 };
 
 export default UserList;
-
-// Styled components for layout
-const Container = styled.div`
-  padding: 20px;
-`;
-
-const Form = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
-
-const Select = styled.select`
-  padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  margin-right: 10px;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #005bb5;
-  }
-`;
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const ListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-
-  span {
-    flex: 1;
-    padding: 0 10px;
-  }
-`;
