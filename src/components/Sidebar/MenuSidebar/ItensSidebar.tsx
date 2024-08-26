@@ -9,12 +9,12 @@ export const menuItems = [
   {
     icon: homeOutline,
     label: "Usuarios",
-    url: "/home",
+    url: "/pageUsers",
   },
   {
     icon: businessOutline,
     label: "Web Pages",
-    url: "/about",
+    url: "/calcas",
   },
   {
     icon: peopleOutline,

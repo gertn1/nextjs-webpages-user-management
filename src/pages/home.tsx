@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import UserList from "@/components/UserList/UserList";
 import styled from "styled-components";
 
 interface HomeProps {
@@ -7,14 +6,15 @@ interface HomeProps {
 }
 
 const StyleHome = styled.div<{ $isOpen: boolean }>`
-  transition: margin-left 0.3s ease;
   margin-left: ${({ $isOpen }) => ($isOpen ? "250px" : "60px")};
+  padding: 30px;
+  transition: margin-left 0.3s ease;
 `;
 
 const Home: FC<HomeProps> = ({ isOpen }) => {
   return (
     <StyleHome $isOpen={isOpen}>
-      <UserList />
+      <h1>Você está na página inicial</h1>
     </StyleHome>
   );
 };
