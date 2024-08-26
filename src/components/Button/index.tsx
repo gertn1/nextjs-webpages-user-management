@@ -27,9 +27,10 @@ const StyledButton = styled.button<{
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  padding: ${({ padding }) => padding || "8px 5px"};
+  padding: ${({ padding }) => padding || "8px 16px"};
   color: ${({ color }) => color || "#fff"};
   background-color: ${({ backgroundColor }) => backgroundColor || "#0070f3"};
+  text-align: center;
 
   &:hover {
     opacity: 0.9;
@@ -43,7 +44,7 @@ const StyledButton = styled.button<{
 const Button: React.FC<ButtonProps> = ({
   text,
   icon,
-  size = "14px",
+  size = "8px",
   color,
   backgroundColor,
   onClick,
@@ -55,6 +56,7 @@ const Button: React.FC<ButtonProps> = ({
       color={color}
       backgroundColor={backgroundColor}
       onClick={onClick}
+      padding={padding}
     >
       {icon && <ButtonIcon icon={icon} />}
       <ButtonText text={text} />

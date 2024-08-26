@@ -3,7 +3,7 @@ import { List, ListItem } from "../styles";
 
 import { FaDeleteLeft } from "react-icons/fa6";
 import Button from "@/components/Button";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface User {
   id: number;
@@ -50,7 +50,7 @@ const UserListItems: React.FC<UserListItemsProps> = ({
               onClick={() => handleDeleteUser(user.id)}
               text="Delete"
               backgroundColor="red"
-              icon={<FaDeleteLeft />}
+              icon={<FaTrash />}
             />
           </ListItem>
         ))

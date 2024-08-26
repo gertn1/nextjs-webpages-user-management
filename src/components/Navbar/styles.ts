@@ -18,11 +18,15 @@ export const TopBar = styled.nav`
 `;
 
 export const LogoContainer = styled.div`
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
   cursor: pointer;
 
   img {
-    height: 40px;
+    height: 100px;
     width: auto;
   }
 
@@ -36,26 +40,21 @@ export const LogoContainer = styled.div`
 export const DropdownMenu = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
-  top: 60px;
-  right: 0;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #fff;
   color: #000;
   border: 1px solid #ccc;
   padding: 10px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+`;
 
-  button {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 10px;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
-  }
+export const UserContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  text-align: right;
 `;

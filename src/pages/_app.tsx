@@ -19,8 +19,8 @@
 
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
-
-import { ThemeProvider } from "styled-components";
+import isPropValid from "@emotion/is-prop-valid";
+import { StyleSheetManager, ThemeProvider } from "styled-components";
 import GlobalStyles from "@/styles/GlobalStyles";
 import { theme } from "@/styles";
 import Layout from "@/components/Layout/Layout";
@@ -33,16 +33,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isNoLayoutRoute = noLayoutRoutes.includes(router.pathname);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {isNoLayoutRoute ? (
-        <Component {...pageProps} />
-      ) : (
-        <Layout>
+    <StyleSheetManager shouldForwardProp={isPropValid}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        {isNoLayoutRoute ? (
           <Component {...pageProps} />
-        </Layout>
-      )}
-    </ThemeProvider>
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
+      </ThemeProvider>
+    </StyleSheetManager>
   );
 }
 

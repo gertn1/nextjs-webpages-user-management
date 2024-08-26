@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import { logout } from "@/pages/api/auth/authService";
 import styled from "styled-components";
 import CurrentUserFetcher from "@/token/token";
-import { DropdownMenu, LogoContainer, TopBar } from "./styles";
+import { DropdownMenu, LogoContainer, TopBar, UserContainer } from "./styles";
 import Button from "../Button";
 import Image from "next/image";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,12 +24,18 @@ const Navbar: React.FC = () => {
   return (
     <TopBar>
       <LogoContainer onClick={toggleMenu}>
-        <Image src="/next.png" alt="Description" width={50} height={50} />
+        <Image src="/next.png" alt="Description" width={100} height={100} />
         <DropdownMenu isOpen={menuOpen}>
-          <Button onClick={handleLogout}>Sair</Button>
+          <Button
+            onClick={handleLogout}
+            text="Sair"
+            padding="5px 12px"
+          ></Button>
         </DropdownMenu>
       </LogoContainer>
-      <CurrentUserFetcher />
+      <UserContainer>
+        <CurrentUserFetcher />
+      </UserContainer>
     </TopBar>
   );
 };

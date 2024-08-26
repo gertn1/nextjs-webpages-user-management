@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiService } from "@/pages/api/Service/apiService";
-import { Container, Select } from "./styles";
+import { Container } from "./styles";
 import Button from "../Button";
 import { FaUserPlus } from "react-icons/fa";
 import UserForm from "./UserForm";
@@ -20,7 +20,6 @@ const UserList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isCreating, setIsCreating] = useState<boolean>(false);
-  const [userRoleId, setUserRoleId] = useState<number>(2); // RoleId for User by default
 
   useEffect(() => {
     fetchUsers();
@@ -49,11 +48,10 @@ const UserList: React.FC = () => {
       try {
         await apiService.post("/User/CreateUser", {
           ...editingUser,
-          roleId: userRoleId,
         });
         setEditingUser(null);
         setIsCreating(false);
-        fetchUsers(); // Recarregue a lista após criar o usuário
+        fetchUsers();
       } catch (error) {
         console.error("Failed to create user", error);
       }
@@ -65,7 +63,7 @@ const UserList: React.FC = () => {
       try {
         await apiService.put(`/User/EditUser/${editingUser.id}`, editingUser);
         setEditingUser(null);
-        fetchUsers(); // Recarregue a lista após editar o usuário
+        fetchUsers();
       } catch (error) {
         console.error("Failed to update user", error);
       }
@@ -86,7 +84,7 @@ const UserList: React.FC = () => {
       id: 0,
       name: "",
       email: "",
-      roleId: userRoleId,
+      roleId: 2,
       password: "",
     });
     setIsCreating(true);
@@ -113,13 +111,6 @@ const UserList: React.FC = () => {
       <h1>User List</h1>
       {!isCreating && !editingUser && (
         <>
-          <Select
-            value={userRoleId}
-            onChange={(e) => setUserRoleId(Number(e.target.value))}
-          >
-            <option value={2}>User</option>
-            <option value={1}>Admin</option>
-          </Select>
           <Button
             onClick={startCreatingUser}
             text="Novo Usuario"
@@ -130,9 +121,15 @@ const UserList: React.FC = () => {
 
       {(isCreating || editingUser) && (
         <UserForm
-          user={editingUser!} // Passe o estado correto para o formulário
+          user={editingUser!}
           onChange={(e) =>
-            setEditingUser({ ...editingUser!, [e.target.name]: e.target.value })
+            setEditingUser({
+              ...editingUser!,
+              [e.target.name]:
+                e.target.name === "roleId"
+                  ? Number(e.target.value)
+                  : e.target.value,
+            })
           }
           onSubmit={isCreating ? handleCreateUser : handleEditUser}
           onCancel={cancelCreateOrEditUser}
