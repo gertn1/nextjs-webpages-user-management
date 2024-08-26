@@ -30,6 +30,7 @@ const StyledButton = styled.button<{
   padding: ${({ padding }) => padding || "8px 16px"};
   color: ${({ color }) => color || "#fff"};
   background-color: ${({ backgroundColor }) => backgroundColor || "#0070f3"};
+  margin: 0.3rem;
   text-align: center;
 
   &:hover {
