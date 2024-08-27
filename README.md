@@ -6,35 +6,21 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js Users & Web Pages Manager
+This project is a web application built using Next.js and React, designed to manage users and web pages efficiently. The application leverages modern web development technologies and best practices to ensure a robust and scalable solution.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Technologies Used
+Next.js: A powerful React framework for building server-rendered applications and static websites.
+React: A popular JavaScript library for building user interfaces, ensuring a dynamic and responsive experience.
+Styled-Components: A CSS-in-JS library used for styling components, providing a clean and modular approach to CSS in the application.
+C# API: A backend API built using C#, following the principles of Clean Architecture for maintainability and scalability.
+JWT Authentication: Secure authentication and authorization using JSON Web Tokens (JWT) to protect API endpoints and manage user sessions.
+Clean Architecture: The project follows the Clean Architecture pattern to organize the codebase, ensuring separation of concerns and facilitating easier maintenance and testing.
+Features
+User Management: Create, edit, and delete users with different roles and permissions.
+Web Page Management: Manage web pages with options to create, edit, delete, and view pages within the application.
+JWT-Based Authentication: Secure login and session management using JWT, ensuring that only authorized users can access certain features.
+Responsive Design: Styled-components ensure that the application looks great on devices of all sizes.
+Getting Started
+Follow the instructions below to set up and run the project locally.
