@@ -14,7 +14,7 @@ export const menuItems = [
   {
     icon: businessOutline,
     label: "Web Pages",
-    url: "/calcas",
+    url: "/pageWeb",
   },
   {
     icon: peopleOutline,
