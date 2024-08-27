@@ -41,8 +41,18 @@ Make sure you have the following installed on your local machine:
 
 ### Installation
 
+npm install 
+
 1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/yourusername/nextjs-users-web-pages-manager.git
    cd nextjs-users-web-pages-manager
+
+![image](https://github.com/user-attachments/assets/633da312-b95c-4977-83c7-82d11f7f41f4)
+
+![image](https://github.com/user-attachments/assets/f30ae4c3-a6a6-4a94-b482-6b4fc0710d54)
+
+![image](https://github.com/user-attachments/assets/ec73535f-14fe-40bb-a977-b70c90ac81b1)
+
+
