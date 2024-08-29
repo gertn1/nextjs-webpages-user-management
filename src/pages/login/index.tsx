@@ -62,7 +62,7 @@ const Login: React.FC = () => {
     event.preventDefault();
     try {
       await login(email, password);
-      router.push("/");
+      router.push("/dashboard");
     } catch (err) {
       setError(
         "Falha ao fazer login. Verifique suas credenciais e tente novamente."

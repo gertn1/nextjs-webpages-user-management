@@ -18,12 +18,12 @@ export const menuItems = [
   },
   {
     icon: peopleOutline,
-    label: "PARCEIROS",
-    url: "/",
+    label: "Perfil",
+    url: "/page-profile",
   },
   {
     icon: cashOutline,
     label: "Home",
-    url: "/",
+    url: "/dashboard",
   },
 ];

@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@ionic/react": "^8.2.7",
+    "@mui/material": "^6.0.1",
     "axios": "^1.7.5",
     "cookies-next": "^4.2.1",
     "ionicons": "^7.4.0",

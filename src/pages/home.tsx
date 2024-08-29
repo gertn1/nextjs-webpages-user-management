@@ -14,7 +14,7 @@ const StyleHome = styled.div<{ $isOpen: boolean }>`
 const Home: FC<HomeProps> = ({ isOpen }) => {
   return (
     <StyleHome $isOpen={isOpen}>
-      <h1>Você está na página inicial</h1>
+      <h1>Você está na página inicial2222</h1>
     </StyleHome>
   );
 };
