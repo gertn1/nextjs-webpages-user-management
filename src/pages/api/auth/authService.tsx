@@ -24,7 +24,8 @@ export const login = async (
 
     const data: LoginResponse = await response.json();
 
-    setCookie("authToken", data.token, { maxAge: 7 * 24 * 60 * 60, path: "/" });
+    // setCookie("authToken", data.token, { maxAge: 7 * 24 * 60 * 60, path: "/" });
+    setCookie("authToken", data.token, { maxAge: 600, path: "/" });
 
     return data;
   } catch (error) {

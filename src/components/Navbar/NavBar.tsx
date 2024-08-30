@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { logout } from "@/pages/api/auth/authService";
@@ -7,6 +7,7 @@ import Button from "../Button";
 import Image from "next/image";
 
 import CurrentUserFetcher from "@/token/CurrentUserFetcher";
+import { getCookie } from "cookies-next";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,13 +16,20 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/dashboard");
     window.location.reload();
   };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  useEffect(() => {
+    const token = getCookie("authToken");
+
+    if (!token) {
+      router.push("/dashboard");
+    }
+  }, [router]);
 
   return (
     <TopBar>
@@ -36,13 +44,6 @@ const Navbar: React.FC = () => {
                 padding="3px 8px"
                 backgroundColor="gray"
               />
-              <Link href="/pageProfil" passHref>
-                <Button
-                  text="Perfil"
-                  padding="3px 8px"
-                  backgroundColor="gray"
-                />
-              </Link>
             </div>
           )}
         </DropdownMenu>

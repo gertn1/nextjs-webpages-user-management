@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar/NavBar";
-import { Sidebar } from "../Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
@@ -28,14 +28,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   };
 
   useEffect(() => {
-    // Verificação de autenticação usando o cookie
     const checkAuth = () => {
-      const token = getCookie("authToken"); // Obtém o token do cookie
+      const token = getCookie("authToken");
       return token !== undefined && token !== null;
     };
 
     if (!checkAuth()) {
-      // Se o usuário não estiver autenticado, redirecione para a página de login
       if (pathname.startsWith("/protected") || pathname === "/") {
         router.push("/dashboard");
       }
@@ -44,15 +42,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   }, [pathname, router]);
 
-  // Se o usuário não estiver autenticado, não renderiza o conteúdo protegido
   if (
     !isAuthenticated &&
     (pathname.startsWith("/protected") || pathname === "/")
   ) {
-    return null; // ou você pode mostrar uma tela de carregamento ou algo semelhante
+    return null;
   }
 
-  // Verifica se estamos na rota /dashboard, para não exibir o Sidebar nessa rota
   const noSidebar = pathname === "/";
 
   return (
