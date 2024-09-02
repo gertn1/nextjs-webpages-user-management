@@ -1,4 +1,3 @@
-// components/ContentCard.tsx
 import React from "react";
 import styled from "styled-components";
 
@@ -13,7 +12,7 @@ const CardWrapper = styled.div`
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
-  width: 320px;
+  width: 400px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -59,7 +58,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <Description>{description}</Description>
       <CardFooter>
         <LinkButton href={link} target="_blank" rel="noopener noreferrer">
-          Access Content
+          Acesse o Site
         </LinkButton>
       </CardFooter>
     </CardWrapper>

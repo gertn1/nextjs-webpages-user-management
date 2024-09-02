@@ -3,27 +3,29 @@ import {
   cashOutline,
   homeOutline,
   peopleOutline,
+  personAddOutline,
+  atOutline,
 } from "ionicons/icons";
 
 export const menuItems = [
   {
     icon: homeOutline,
+    label: "Home",
+    url: "/dashboard",
+  },
+  {
+    icon: peopleOutline,
     label: "Usuarios",
     url: "/page-users",
   },
   {
-    icon: businessOutline,
-    label: "Web Pages",
+    icon: atOutline,
+    label: "Web Page",
     url: "/page-web",
   },
   {
-    icon: peopleOutline,
+    icon: personAddOutline,
     label: "Perfil",
     url: "/page-profile",
-  },
-  {
-    icon: cashOutline,
-    label: "Home",
-    url: "/dashboard",
   },
 ];
