@@ -1,14 +1,17 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import ContentList from "@/components/WebPageCard";
 
-const StylePageHome = styled.div``;
+const StylePageWeb = styled.div`
+  padding: 20px;
+`;
 
-const PageHome: FC = () => {
+const WebPagesCard: FC = () => {
   return (
-    <StylePageHome>
-      <h1>Você está na página inicial</h1>
-    </StylePageHome>
+    <StylePageWeb>
+      <ContentList />
+    </StylePageWeb>
   );
 };
 
-export default PageHome;
+export default WebPagesCard;

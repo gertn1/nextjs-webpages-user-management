@@ -1,5 +1,3 @@
-import { setCookie, deleteCookie, getCookie } from "cookies-next";
-
 export interface LoginResponse {
   token: string;
 }
@@ -23,26 +21,9 @@ export const login = async (
     }
 
     const data: LoginResponse = await response.json();
-
-    // setCookie("authToken", data.token, { maxAge: 7 * 24 * 60 * 60, path: "/" });
-    setCookie("authToken", data.token, { maxAge: 600, path: "/" });
-
     return data;
   } catch (error) {
     console.error("Error during login:", error);
     throw new Error("Login failed");
   }
-};
-
-export const logout = (): void => {
-  // Remove o token do cookie
-  deleteCookie("authToken", { path: "/" });
-};
-
-export const isAuthenticated = (): boolean => {
-  if (typeof window === "undefined") {
-    return false;
-  }
-
-  return !!getCookie("authToken");
 };
