@@ -20,7 +20,7 @@ export const apiService = {
   },
 
   post: async (endpoint: string, body: any): Promise<any> => {
-    const token = getCookie("authToken"); // Obtém o token do cookie
+    const token = getCookie("authToken");
 
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "POST",
@@ -39,7 +39,7 @@ export const apiService = {
   },
 
   put: async (endpoint: string, body: any): Promise<any> => {
-    const token = getCookie("authToken"); // Obtém o token do cookie
+    const token = getCookie("authToken");
 
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "PUT",
@@ -58,7 +58,8 @@ export const apiService = {
   },
 
   delete: async (endpoint: string): Promise<any> => {
-    const token = getCookie("authToken"); // Obtém o token do cookie
+    console.log("token");
+    const token = getCookie("authToken");
 
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "DELETE",
@@ -75,3 +76,4 @@ export const apiService = {
     return response.json();
   },
 };
+console.log("authService");

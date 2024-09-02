@@ -63,6 +63,7 @@ const UserList: React.FC = () => {
       try {
         await apiService.put(`/User/EditUser/${editingUser.id}`, editingUser);
         setEditingUser(null);
+
         fetchUsers();
       } catch (error) {
         console.error("Failed to update user", error);
@@ -75,6 +76,7 @@ const UserList: React.FC = () => {
       await apiService.delete(`/User/RemoveUser/${userId}`);
       fetchUsers();
     } catch (error) {
+      console.log("userlist");
       console.error("Failed to delete user", error);
     }
   };
@@ -105,7 +107,7 @@ const UserList: React.FC = () => {
         return "";
     }
   };
-
+  console.log("criado ");
   return (
     <Container>
       <h1>User List</h1>

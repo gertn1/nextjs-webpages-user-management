@@ -72,6 +72,7 @@ const ProfileUpdate: React.FC = () => {
     }
   };
 
+  console.log("profile");
   return (
     <Container>
       <h2>Update Profile</h2>

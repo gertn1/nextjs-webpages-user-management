@@ -1,62 +1,26 @@
 import React, { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { login } from "../api/auth/authService";
-
-const LoginContainer = styled.div`
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-`;
-
-const LoginInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`;
-
-const LoginButton = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #005bb5;
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: red;
-`;
-
-const getCookie = (name: string) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(";").shift();
-};
+import { useAuth } from "@/context/AuthContext"; // Importe o useAuth
+import {
+  ErrorMessage,
+  LoginButton,
+  LoginContainer,
+  LoginInput,
+} from "./styles";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const { login, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // Verifique se o usuário já está autenticado
   useEffect(() => {
-    const token = getCookie("authToken");
-    if (token) {
+    if (isAuthenticated) {
       router.push("/");
     }
-  }, [router]);
+  }, [isAuthenticated, router]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -90,8 +54,8 @@ const Login: React.FC = () => {
           required
         />
         <LoginButton type="submit">Entrar</LoginButton>
+        germano@gmail.com
       </form>
-      germano@gmail.com
     </LoginContainer>
   );
 };
